@@ -1,0 +1,8 @@
+autogen
+openai
+pandas
+requests
+beautifulsoup4
+playwright
+autogenstudio
+crawl4ai
