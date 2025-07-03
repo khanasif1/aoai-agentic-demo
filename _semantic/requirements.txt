@@ -1,8 +1,12 @@
 autogen
-openai
+azure-ai-inference
+AzureOpenAI
+#azure-openai
+azure-identity
 pandas
 requests
 beautifulsoup4
 playwright
 autogenstudio
 crawl4ai
+python-dotenv
