@@ -2,17 +2,14 @@ import asyncio
 import sys
 import os
 from semantic_kernel import Kernel
-from semantic_kernel.functions import kernel_function
 from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion, AzureChatPromptExecutionSettings
 from semantic_kernel.connectors.ai import FunctionChoiceBehavior
 from semantic_kernel.contents import ChatHistory
-from semantic_kernel.functions import KernelArguments
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from plugin.technewsplugin import technewsplugin
 
 
-from azure.identity import DefaultAzureCredential
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -31,20 +28,20 @@ async def main():
     
    try:  
         print("Get Credentials")   
-        _credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
-       
-        token = _credential.get_token("https://api.applicationinsights.io/.default")
-        # print(f"Using Entra ID authentication : {token}")
+        
+        token_provider = get_bearer_token_provider(
+        DefaultAzureCredential(),
+        "https://cognitiveservices.azure.com/.default"  # The scope for Azure OpenAI Service
+        )
         print(f"env: {azure_endpoint} - {deployment_name}")
         # Add Azure OpenAI chat completion
         chat_completion = AzureChatCompletion(
             deployment_name=deployment_name,      
-            base_url=azure_endpoint,
-            credential=_credential,
-            # api_key=''        
-            # ad_token=token
+            endpoint=azure_endpoint,
+            ad_token_provider=token_provider,
+            service_id="azure_open_ai",
         )
-   except Exception as e:
+   except Exception as e:        
         print("Error in authentication: ", e)                
         exit()
 

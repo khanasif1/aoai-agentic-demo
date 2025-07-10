@@ -10,4 +10,4 @@ playwright
 autogenstudio
 crawl4ai
 python-dotenv
-semantic-kernel
+semantic-kernel 
