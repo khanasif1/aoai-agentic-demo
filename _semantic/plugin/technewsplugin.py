@@ -19,15 +19,21 @@ class technewsplugin():
     @kernel_function(description='This function crawl the technology websidte to get latest news from techcrunch')   
     async def techcrunchNews(self):
         """This function crawl the technology websidte to get latest news from techcrunch"""
+        print("********************************")
+        print("******TECHCRUNCH CRAWLING STARTED*********")
+        print("********************************") 
         async with AsyncWebCrawler() as crawler:
             result = await crawler.arun(
-                url=self._url,
-                #  selector=".river--homepage .post-block__title a"
+                url=self._url,          
                 selector="ul.wp-block-post-template.is-layout-flow.wp-block-post-template-is-layout-flow"
             )
             
-            print(result.markdown)    
-            print("Call analyze_techcrunch_articles")
+            # print(result.markdown) 
+            print("********************************")
+            print("******TECHCRUNCH CRAWLING COMPLETE*********")
+            print("********************************") 
+            return result.markdown  
+            # print("Call analyze_techcrunch_articles")
             # analyzed_articles = analyze_techcrunch_articles(result.markdown)
             # print(f"Analyzed articles: {analyzed_articles}")
             

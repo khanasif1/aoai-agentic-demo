@@ -5,6 +5,7 @@ from semantic_kernel import Kernel
 from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion, AzureChatPromptExecutionSettings
 from semantic_kernel.connectors.ai import FunctionChoiceBehavior
 from semantic_kernel.contents import ChatHistory
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from plugin.technewsplugin import technewsplugin
 
@@ -20,7 +21,7 @@ deployment_name = os.getenv("deployment_name")
 source_websidte = os.getenv("source_websidte")    
 
 async def main():
-   technews = technewsplugin(source_websidte)
+
    # Initialize the kernel
    kernel = Kernel()
    print(f"Crawel Website: {source_websidte}") 

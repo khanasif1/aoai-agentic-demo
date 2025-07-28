@@ -3,5 +3,7 @@ autogen-demo
 
 ## Run Solution
 
-- cd <path>>\aoai-agentic-demo
-- python .\_semantic\agents\newsAgent.py
+- python -m venv .venv
+- .\.venv\Scripts\activate.ps1
+- cd <path>\aoai-agentic-demo\_semantic 
+- python .\agents\newsAgent.py
