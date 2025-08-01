@@ -1,39 +1,29 @@
-# autogen-agentic-demo
-autogen-demo
-
-## Run Solution
-
-- python -m venv .venv
-- .\.venv\Scripts\activate.ps1
-- cd <path>\aoai-agentic-demo\_semantic 
-- python .\agents\newsAgent.py
-
----
+# AOAI-Agentic-Demo
 
 ## Architecture Diagram
 
 ```mermaid
 flowchart TD
-    UserInput((User Input))
-    AO[Agent Orchestrator\n(_semantic/agentOrchestrator.py)]
-    TechAgent[Tech News Agent\n(_semantic/agents/technewsAgent.py)]
-    CurrentNewsAgent[Current News Agent\n(_semantic/agents/currentewsAgent.py)]
-    TechPlugin[Tech News Plugin\n(_semantic/plugin/technewsplugin.py)]
-    CurrentPlugin[Current News Plugin\n(_semantic/plugin/currentnewsplugin.py)]
-    InferencePlugin[Inference Plugin\n(_semantic/plugin/inferenceplugin.py)]
-    AzureOpenAI[(Azure OpenAI Service)]
+    UserInput[User Input]
+    AO[Agent Orchestrator: semantic/agentOrchestrator.py]
+    TechAgent[Tech News Agent: semantic/agents/technewsAgent.py]
+    CurrentNewsAgent[Current News Agent: semantic/agents/currentewsAgent.py]
+    TechPlugin[Tech News Plugin: semantic/plugin/technewsplugin.py]
+    CurrentPlugin[Current News Plugin: semantic/plugin/currentnewsplugin.py]
+    InferencePlugin[Inference Plugin: semantic/plugin/inferenceplugin.py]
+    AzureOpenAI[Azure OpenAI Service]
     WebCrawl[Async Web Crawler]
 
-    UserInput-->|input|AO
-    AO-->|orchestrates|TechAgent
-    AO-->|orchestrates|CurrentNewsAgent
-    TechAgent-->|uses|TechPlugin
-    CurrentNewsAgent-->|uses|CurrentPlugin
-    TechPlugin-->|calls|WebCrawl
-    CurrentPlugin-->|calls|WebCrawl
-    TechPlugin-->|calls|InferencePlugin
-    CurrentPlugin-->|calls|InferencePlugin
-    InferencePlugin-->|API call|AzureOpenAI
+    UserInput -->|input| AO
+    AO -->|orchestrates| TechAgent
+    AO -->|orchestrates| CurrentNewsAgent
+    TechAgent -->|uses| TechPlugin
+    CurrentNewsAgent -->|uses| CurrentPlugin
+    TechPlugin -->|calls| WebCrawl
+    CurrentPlugin -->|calls| WebCrawl
+    TechPlugin -->|calls| InferencePlugin
+    CurrentPlugin -->|calls| InferencePlugin
+    InferencePlugin -->|API call| AzureOpenAI
 ```
 
 ### Explanation
@@ -45,5 +35,14 @@ flowchart TD
 - **External Services**: Azure OpenAI and web sources are accessed via plugins for data retrieval and AI-powered processing.
 
 This modular architecture enables easy extension (e.g., adding new agents or plugins), robust orchestration, and clear separation of concerns.
+
+---
+
+## Run Solution
+
+- python -m venv .venv
+- .\.venv\Scripts\activate.ps1
+- cd <path>\aoai-agentic-demo\_semantic 
+- python .\agents\newsAgent.py
 
 ---
